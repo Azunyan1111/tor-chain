@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/beevik/ntp"
 	"github.com/jinzhu/gorm"
-	"net/http"
-	"os"
-
 	"github.com/labstack/echo"
 	_ "github.com/mattn/go-sqlite3"
+	"net/http"
+	"os"
+	"time"
 )
 
 var db *gorm.DB
@@ -19,12 +20,18 @@ func main() {
 	// Echo instance
 	e := echo.New()
 
+	baseTime,err := ntp.QueryWithOptions("time.google.com",ntp.QueryOptions{})
+	if err != nil{
+		panic(err)
+	}
+
 	// Route => handler
 	e.GET("/", func(c echo.Context) error {
 		var log Log
 		log.IpAddress = c.QueryParam("ip")
 		log.Method = c.Request().Method
 		log.Data = c.QueryParam("data")
+		log.Time = time.Now().Add(baseTime.ClockOffset)
 		db.Create(&log)
 		fmt.Println(log)
 		return c.String(http.StatusOK, "Hello, World!\n")
@@ -58,4 +65,5 @@ type Log struct {
 	IpAddress string
 	Method string
 	Data string
+	Time time.Time
 }

@@ -1,0 +1,13 @@
+version: '2'
+
+
+services:
+  tor-chain:
+    build: ./docker
+    ports:
+    - "80:80" # DirPort
+    - "443:443" # OrPort
+    - "50000:50000" # DirPort
+    - "55000:55000" # OrPort
+    volumes: # 鍵のファイルとかを保存する
+     - ./.tor/:~/.tor/
