@@ -3,6 +3,8 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"encoding/json"
+	"fmt"
 	"github.com/beevik/ntp"
 	"github.com/labstack/echo"
 	"io"
@@ -97,12 +99,12 @@ func pktParse(line string, temp *Pkt) {
 		if !temp.Syn && !temp.Fin {
 			return
 		}
-		//j, err := json.Marshal(&temp)
-		//if err != nil {
-		//	panic(err)
-		//}
+		j, err := json.Marshal(&temp)
+		if err != nil {
+			panic(err)
+		}
 		// 該当パケットを出力
-		//fmt.Println(string(j))
+		fmt.Println(string(j))
 		Pkts = append(Pkts,*temp)
 		return
 	}
