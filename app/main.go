@@ -35,6 +35,8 @@ var err error
 
 var Pkts []Pkt
 
+var GIpAddress string
+
 
 func main() {
 	// サーバー構築
@@ -64,6 +66,21 @@ func main() {
 	end = regexp.MustCompile(`==`)
 
 	// TODO:グローバルIPアドレスを取得する。（TODO:インターフェイス見ろよw） os.interface的な FIT.AC.JPはグローバルIPが降ってるので今回は無視
+	resp,err := http.Get("https://ipinfo.io")
+	if err != nil{
+		panic(err)
+	}
+	type IpInfoIo struct {
+		IP       string `json:"ip"`
+	}
+	var ipInfoIo IpInfoIo
+	if err := json.NewDecoder(resp.Body).Decode(&ipInfoIo);err != nil && ipInfoIo.IP != ""{
+		panic(err)
+	}else{
+		GIpAddress = ipInfoIo.IP
+	}
+
+
 	// 標準時間を取得
 	BaseTime, err = ntp.QueryWithOptions("time.google.com", ntp.QueryOptions{})
 	if err != nil {
@@ -102,6 +119,12 @@ func pktParse(line string, temp *Pkt) {
 		if !temp.Syn && !temp.Fin {
 			return
 		}
+		if temp.Syn{
+			temp.Source = GIpAddress
+		}else if temp.Fin{
+			temp.Destination = GIpAddress
+		}
+
 		j, err := json.Marshal(&temp)
 		if err != nil {
 			panic(err)
