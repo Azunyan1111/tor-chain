@@ -16,8 +16,8 @@ EXPOSE 443
 RUN wget https://www.torproject.org/dist/tor-0.3.4.9.tar.gz
 
 # Create Tor
-RUN tar -xvf tor-0.3.4.8.tar.gz
-WORKDIR tor-0.3.4.8/
+RUN tar -xvf tor-0.3.4.9.tar.gz
+WORKDIR tor-0.3.4.9/
 RUN ./configure && make
 WORKDIR /
 
@@ -26,7 +26,7 @@ RUN mkdir /etc/tor/
 RUN echo "ORPort 443\nDirPort 80\nExitRelay 0\nExitPolicy reject *:*" >> /etc/tor/torrc
 
 # run tor node
-RUN /tor-0.3.4.8/src/or/tor -f /etc/tor/torrc & >> /etc/tor/torlog
+RUN /tor-0.3.4.9/src/or/tor -f /etc/tor/torrc & >> /etc/tor/torlog
 
 # pkttols
 WORKDIR /
