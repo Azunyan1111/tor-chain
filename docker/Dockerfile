@@ -33,9 +33,9 @@ WORKDIR pkttools-1.16/
 RUN make
 
 # PORT
-EXPOSE 8585:8585
-EXPOSE 80:80
-EXPOSE 443:443
+EXPOSE 8585
+EXPOSE 80
+EXPOSE 443
 
 # WORKDIR /go/src/github.com/Azunyan1111/tor-chain/app/
 
