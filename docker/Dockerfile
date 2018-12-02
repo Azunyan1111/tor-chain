@@ -26,7 +26,7 @@ RUN mkdir /etc/tor/
 RUN echo "ORPort 443\nDirPort 80\nExitRelay 0\nExitPolicy reject *:*" >> /etc/tor/torrc
 
 # run tor node
-RUN /stor-0.3.4.8/src/or/tor -f /etc/tor/torrc &
+RUN /tor-0.3.4.8/src/or/tor -f /etc/tor/torrc &
 
 # pkttols
 WORKDIR /
