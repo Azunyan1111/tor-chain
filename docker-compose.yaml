@@ -10,7 +10,7 @@ services:
      - '.:/root/go/src/github.com/Azunyan1111/tor-chain/'
     working_dir: '/root/go/src/github.com/Azunyan1111/tor-chain/app/'
     command: bash -c '/usr/lib/go-1.10/bin/go get -u ./ && /usr/lib/go-1.10/bin/go run main.go'
-
+    restart: always
 
 volumes:
   data:
