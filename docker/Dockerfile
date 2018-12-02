@@ -13,7 +13,7 @@ EXPOSE 80
 EXPOSE 443
 
 # get Tor file
-RUN wget https://www.torproject.org/dist/tor-0.3.4.8.tar.gz
+RUN wget https://www.torproject.org/dist/tor-0.3.4.9.tar.gz
 
 # Create Tor
 RUN tar -xvf tor-0.3.4.8.tar.gz
