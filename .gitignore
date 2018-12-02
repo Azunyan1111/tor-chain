@@ -1,7 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
-.idea
+.idea/
 AttackClient/main
 AttackServer/log.db
 AttackServer/main
-app/pkttools-1.16
+app/pkttools-1.16/
 app/main
+app/pkttools-1.16.zip
+app/cache/
