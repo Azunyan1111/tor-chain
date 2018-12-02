@@ -4,10 +4,19 @@ version: '2'
 services:
   tor-chain:
     build: ./docker
-    ports:
-    - "80:80" # DirPort
-    - "443:443" # OrPort
-    - "50000:50000" # DirPort
-    - "55000:55000" # OrPort
+#    ports:
+#    - "80:80" # DirPort
+#    - "443:443" # OrPort
+#    - "50000:50000" # DirPort
+#    - "55000:55000" # OrPort
     volumes: # 鍵のファイルとかを保存する
-     - ./.tor/:~/.tor/
+     - './.tor/:/root/.tor/'
+     - 'data:/go'
+     - '.:/root/go/src/github.com/Azunyan1111/tor-chain/'
+    working_dir: '/root/go/src/github.com/Azunyan1111/tor-chain/app/'
+    command: bash -c '/usr/lib/go-1.10/bin/go get -u ./ && /usr/lib/go-1.10/bin/go run main.go'
+
+
+volumes:
+  data:
+    driver: 'local'

@@ -1,7 +1,6 @@
 # 攻撃スタート
 start:
 	make build
-	echo "Change terminal. and do 'make send'"
 	./server/main
 # コンパイル
 build:
@@ -16,6 +15,7 @@ clean:
 	rm server/main
 	rm client/main
 	rm server/log.db
+
 # ビルド
-docker:
+up:
 	docker-compose up --build

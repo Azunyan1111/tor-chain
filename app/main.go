@@ -63,7 +63,7 @@ func main() {
 	start = regexp.MustCompile(`-- ([0-9]+) --`)
 	end = regexp.MustCompile(`==`)
 
-	// TODO:グローバルIPアドレスを取得する。（TODO:インターフェイス見ろよw） os.interface的な
+	// TODO:グローバルIPアドレスを取得する。（TODO:インターフェイス見ろよw） os.interface的な FIT.AC.JPはグローバルIPが降ってるので今回は無視
 	// 標準時間を取得
 	BaseTime, err = ntp.QueryWithOptions("time.google.com", ntp.QueryOptions{})
 	if err != nil {
@@ -71,8 +71,8 @@ func main() {
 	}
 	// キャプチャするコマンドを生成（同じコマンドを実行すればターミナルで再現できるよ）
 
-	cmdSrcStr := "app/pkttools-1.16/pkt-recv -i en0 TCP.SRC_PORT==443 -a"
-	cmdDstStr := "app/pkttools-1.16/pkt-recv -i en0 TCP.DST_PORT==443 -a"
+	cmdSrcStr := "/pkttools-1.16/pkt-recv -i eth0 TCP.SRC_PORT==443 -a"
+	cmdDstStr := "/pkttools-1.16/pkt-recv -i eth0 TCP.DST_PORT==443 -a"
 	cmdSrc := exec.Command("sh", "-c", cmdSrcStr)
 	cmdDst := exec.Command("sh", "-c", cmdDstStr)
 

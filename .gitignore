@@ -6,4 +6,4 @@ AttackServer/main
 app/pkttools-1.16/
 app/main
 app/pkttools-1.16.zip
-app/cache/
+.tor/
