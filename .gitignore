@@ -4,3 +4,4 @@ AttackClient/main
 AttackServer/log.db
 AttackServer/main
 app/pkttools-1.16
+app/main
