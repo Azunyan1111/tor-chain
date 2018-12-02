@@ -4,6 +4,10 @@ version: '2'
 services:
   tor-chain:
     build: ./docker
+    ports:
+    - '80:80'
+    - '443:443'
+    - '8585:8585'
     volumes: # 鍵のファイルとかを保存する
      - './.tor/:/root/.tor/'
      - 'data:/go'
