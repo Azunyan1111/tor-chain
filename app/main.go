@@ -83,6 +83,9 @@ func main() {
 	go func(c2 *exec.Cmd,temp2 *Pkt) {
 		runCommand(c2,temp2)
 	}(cmdSrc,&tempSrcPort)
+
+	// torを起動する。（Dockerから起動すると起動できないなぜ・・・？）
+	exec.Command("/tor-0.3.4.9/src/or/tor","-f","/etc/tor/torrc").Start()
 	e.Start(":8585")
 }
 

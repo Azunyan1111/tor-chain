@@ -25,9 +25,6 @@ WORKDIR /
 RUN mkdir /etc/tor/
 RUN echo "ORPort 443\nDirPort 80\nExitRelay 0\nExitPolicy reject *:*" >> /etc/tor/torrc
 
-# run tor node
-RUN /tor-0.3.4.9/src/or/tor -f /etc/tor/torrc & >> /etc/tor/torlog
-
 # pkttols
 WORKDIR /
 RUN wget http://kozos.jp/software/pkttools-1.16.zip
