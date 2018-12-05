@@ -27,7 +27,7 @@ Installation of Golang is necessary for the operation of the exercise server.
 ```$xslt
 apt-get update
 apt-get install -y gcc make
-apt-get install golang1.10
+apt-get install -y golang-1.10
 /usr/lib/go-1.10/bin/go help
 ```
 
