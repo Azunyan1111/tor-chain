@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/beevik/ntp"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"io"
 	"net/http"
 	"os/exec"
@@ -41,6 +42,8 @@ var GIpAddress string
 func main() {
 	// サーバー構築
 	e := echo.New()
+
+	e.Use(middleware.Recover())
 
 	e.GET("/", func(c echo.Context) error {
 		if len(Pkts) == 0{
